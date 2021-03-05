@@ -105,7 +105,7 @@ function createDepartment() {
             runSearch();
         });
   }
-  function createRoles() {
+  function createRole() {
     console.log("Add roles");
     inquirer
     .prompt({
@@ -128,30 +128,29 @@ function createDepartment() {
             runSearch();
         });
   }
-  function createDepartment() {
-    console.log("Add department");
+  function createEmployees() {
+    console.log("Add employees");
     inquirer
     .prompt({
-        name: "departmentName",
+        name: "employeeName",
         type: "input",
-        message: "What department would you like to add?"
+        message: "What employee would you like to add?"
     })
     .then(function (answer) {
         var query = connection.query(
-            "INSERT INTO department SET ?",
+            "INSERT INTO employee SET ?",
             {
-              name: answer.departmentName
+              name: answer.employeeName
             },
             function(err, res) {
               if (err) throw err;
-              console.log(res.affectedRows + " Department Created");
+              console.log(res.affectedRows + " Employee Created");
               // Call updateProduct AFTER the INSERT completes
             }
           );
             runSearch();
         });
   }
-  
 function artistSearch() {
     inquirer
         .prompt({
