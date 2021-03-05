@@ -47,12 +47,12 @@ function runSearch() {
                     break;
 
                 case "Add roles":
-                    //multiSearch();
+                    createRoles();
                     console.log("Add roles")
                     break;
 
                 case "Add employees":
-                    //rangeSearch();
+                    createEmployees();
                     console.log("Add employees")
                     break;
 
@@ -83,6 +83,52 @@ function runSearch() {
         });
 }
 function createDepartment() {
+    console.log("Add department");
+    inquirer
+    .prompt({
+        name: "departmentName",
+        type: "input",
+        message: "What department would you like to add?"
+    })
+    .then(function (answer) {
+        var query = connection.query(
+            "INSERT INTO department SET ?",
+            {
+              name: answer.departmentName
+            },
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " Department Created");
+              // Call updateProduct AFTER the INSERT completes
+            }
+          );
+            runSearch();
+        });
+  }
+  function createRoles() {
+    console.log("Add roles");
+    inquirer
+    .prompt({
+        name: "roleName",
+        type: "input",
+        message: "What role would you like to add?"
+    })
+    .then(function (answer) {
+        var query = connection.query(
+            "INSERT INTO role SET ?",
+            {
+              name: answer.roleName
+            },
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " Role Created");
+              // Call updateProduct AFTER the INSERT completes
+            }
+          );
+            runSearch();
+        });
+  }
+  function createDepartment() {
     console.log("Add department");
     inquirer
     .prompt({
