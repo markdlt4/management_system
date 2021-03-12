@@ -43,27 +43,27 @@ function runSearch() {
             switch (answer.action) {
                 case "Add departments":
                     createDepartment();
-                    console.log("Add departments")
+                    //console.log("Add departments")
                     break;
 
                 case "Add roles":
                     createRoles();
-                    console.log("Add roles")
+                   // console.log("Add roles")
                     break;
 
                 case "Add employees":
                     createEmployees();
-                    console.log("Add employees")
+                    //console.log("Add employees")
                     break;
 
                 case "View departments":
                     //songSearch();
-                    console.log("View departments")
+                    //console.log("View departments")
                     break;
 
                 case "View roles":
                     //songSearch();
-                    console.log("View roless")
+                    //console.log("View roless")
                     break;
 
                 case "View employees":
@@ -73,7 +73,7 @@ function runSearch() {
 
                 case "Update employee roles":
                     //songSearch();
-                    console.log("Update employee roles")
+                    //console.log("Update employee roles")
                     break;
 
                 case "exit":
@@ -105,19 +105,32 @@ function createDepartment() {
             runSearch();
         });
   }
-  function createRole() {
-    console.log("Add roles");
+  function createRoles() {
+    //console.log("Add roles");
     inquirer
-    .prompt({
+    .prompt([{
         name: "roleName",
         type: "input",
         message: "What role would you like to add?"
-    })
+    },
+    {
+        name: "salary",
+        type: "input",
+        message: "How much is your salary?"
+    },
+    { 
+        name: "department_id",
+        type: "input",
+        message: "What is your department id?"
+    }
+])
     .then(function (answer) {
         var query = connection.query(
             "INSERT INTO role SET ?",
             {
-              name: answer.roleName
+              title: answer.roleName,
+              salary: answer.salary,
+              department_id: answer.department_id
             },
             function(err, res) {
               if (err) throw err;
