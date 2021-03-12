@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+const { create } = require("domain");
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -57,6 +58,7 @@ function runSearch() {
                     break;
 
                 case "View departments":
+                    viewDepartments();
                     //songSearch();
                     //console.log("View departments")
                     break;
@@ -177,6 +179,18 @@ function createDepartment() {
           );
             runSearch();
         });
+  }
+  function viewDepartments() {
+    console.log("Add department");
+        var query = connection.query(
+            "SELECT * FROM department",
+            function(err, res) {
+              if (err) throw err;
+              console.log(res);
+              // Call updateProduct AFTER the INSERT completes
+            }
+          );
+            runSearch();
   }
 function artistSearch() {
     inquirer
