@@ -144,16 +144,30 @@ function createDepartment() {
   function createEmployees() {
     console.log("Add employees");
     inquirer
-    .prompt({
-        name: "employeeName",
+    .prompt([{
+        name: "first_name",
         type: "input",
-        message: "What employee would you like to add?"
-    })
+        message: "What is your first name?"
+    },
+    {
+        name: "last_name",
+        type: "input",
+        message: "What is your last name?"
+    },
+    {
+        name: "roll_id",
+        type: "input",
+        message: "What is your roll id?"
+    }])
     .then(function (answer) {
         var query = connection.query(
             "INSERT INTO employee SET ?",
             {
-              name: answer.employeeName
+              first_name: answer.first_name,
+              last_name: answer.last_name,
+              roll_id: answer.roll_id,
+             // manager_id: answer.manager_id
+
             },
             function(err, res) {
               if (err) throw err;
