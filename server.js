@@ -64,6 +64,7 @@ function runSearch() {
                     break;
 
                 case "View roles":
+                    viewRole();
                     //songSearch();
                     //console.log("View roless")
                     break;
@@ -181,16 +182,28 @@ function createDepartment() {
         });
   }
   function viewDepartments() {
-    console.log("Add department");
+   // console.log("Add department");
         var query = connection.query(
             "SELECT * FROM department",
             function(err, res) {
               if (err) throw err;
               console.log(res);
+              runSearch();
               // Call updateProduct AFTER the INSERT completes
             }
           );
-            runSearch();
+  }
+  function viewRole() {
+   // console.log("Add department");
+        var query = connection.query(
+            "SELECT * FROM role",
+            function(err, res) {
+              if (err) throw err;
+              console.log(res);
+              runSearch();
+              // Call updateProduct AFTER the INSERT completes
+            }
+          );
   }
 function artistSearch() {
     inquirer
