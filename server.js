@@ -70,8 +70,9 @@ function runSearch() {
                     break;
 
                 case "View employees":
+                    viewEmployee();
                     //songSearch();
-                    console.log("View employees")
+                    //console.log("View employees")
                     break;
 
                 case "Update employee roles":
@@ -205,6 +206,18 @@ function createDepartment() {
             }
           );
   }
+  function viewEmployee() {
+    // console.log("Add employee");
+         var query = connection.query(
+             "SELECT * FROM employee",
+             function(err, res) {
+               if (err) throw err;
+               console.log(res);
+               runSearch();
+               // Call updateProduct AFTER the INSERT completes
+             }
+           );
+   }
 function artistSearch() {
     inquirer
         .prompt({
