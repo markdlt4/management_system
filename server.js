@@ -76,6 +76,7 @@ function runSearch() {
                     break;
 
                 case "Update employee roles":
+                    updateEmployeeRoles();
                     //songSearch();
                     //console.log("Update employee roles")
                     break;
@@ -218,6 +219,39 @@ function createDepartment() {
              }
            );
    }
+   function updateEmployeeRoles() {
+    //console.log("Updating all Rocky Road quantities...\n");
+    inquirer
+    .prompt([{
+        name: "employee_id",
+        type: "input",
+        message: "What is the employees ID that you want to update?"
+    },
+    {
+        name: "roll_id",
+        type: "input",
+        message: "What is your roll id?"
+    }])
+    .then(function (answer) {
+        var query = connection.query(
+            "UPDATE employee SET ? WHERE ?",
+            [
+              {
+                roll_id: answer.roll_id
+              },
+              {
+                id: answer.employee_id
+              }
+            ],
+            function(err, res) {
+              if (err) throw err;
+              console.log(res.affectedRows + " employee updated!\n");
+              // Call deleteProduct AFTER the UPDATE completes
+            }
+          );
+            runSearch();
+        });
+    }
 function artistSearch() {
     inquirer
         .prompt({
